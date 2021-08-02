@@ -88,7 +88,7 @@ def driver():
             delete()
 
         if choice == 5:
-            print("Bye Bye f u  ")
+            print("exit entered")
             exit()
 
 
