@@ -8,8 +8,9 @@ def sortdata():
     details = fin.readlines()
     for i in range(len(details)):
         data = details[i].split("|")
-        fout.write(f"{i}|{data[0]}|\n")
+        fout.write(f"{i}|{data[1]}|\n")
     fout.close()
+
 
 def insert():
     name = input("enter name: ")
@@ -24,22 +25,23 @@ def insert():
     sortdata()
 
 
-def display():
-    print("USN\tName\tSem\tBranch")
-    details = f2.readlines()
-    for i in range(len(details)):
-        data = details[i].split("|")
-        print("\t".join(data))
+# def display():
+#     print("USN\tName\tSem\tBranch")
+#     details = f2.readlines()
+#     for i in range(len(details)):
+#         data = details[i].split("|")
+#         print("\t".join(data))
+
 
 def search():
-    usn = input("Enter the USN: ")
+    name = input("Enter the Name: ")
     lists = f1.readlines()
     f1.seek(0)
     id = 0
     flag = True
     for i in range(len(lists)):
         data = lists[i].split("|")
-        if data[1] == usn:
+        if data[1] == name:
             id = data[0]
             flag = False
             break
@@ -53,40 +55,39 @@ def search():
     print("\t".join(mystr))
 
 def delete():
-    usn = input("Enter USN: ")
+    name = input("Enter name: ")
     indexing = open("index.txt", "r")
     stdata = open("data.txt", "r")
     lists = indexing.readlines()
     temp = stdata.readlines()
     for j in range(len(lists)):
         data = lists[j].split("|")
-        if data[1] == usn:
+        if data[1] == name:
             temp.pop(j)
-    fouts = open("data.txt","w")
+    fouts = open("data.txt", "w")
     for i in range(len(temp)):
         fouts.write(temp[i])
     fouts.close()
     sortdata()
 
+
 def driver():
     while True:
-        print("1.Insert\n2.Display\n3.Search\n4.Delete\n5.Exit")
+        print("1.Insert\n2.Display\n3.Delete\n4.Search\n5.Exit")
         choice = int(input("Enter the choice: "))
         if choice == 1:
             insert()
 
-        if choice == 2:
-            display()
-
         if choice == 3:
-            search()
+            delete()
 
         if choice == 4:
-            delete()
+            search()
 
         if choice == 5:
             print("exit entered")
             exit()
+
 
 driver()
 # sortdata()
